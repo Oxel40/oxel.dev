@@ -18,10 +18,10 @@ import Network.Wai.Middleware.RequestLogger (logStdout)
 import WaiAppStatic.Types (toPieces)
 
 mainRouter :: Application
-mainRouter = 
+mainRouter =
   router
-    [ ("api", API.apiRouter)
-    , ("static", static)
+    [ ("api", API.apiRouter),
+      ("static", static)
     ]
     webApp
 
