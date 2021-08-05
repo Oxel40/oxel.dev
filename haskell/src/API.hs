@@ -4,21 +4,19 @@ module API where
 
 import qualified Data.ByteString.Lazy.Char8 as L8
 import Data.Time (getCurrentTime)
-import Helpers (app404, router)
 import Network.HTTP.Types as H (status200)
 import Network.Wai as Wai
   ( Application,
     Request (pathInfo),
     responseLBS,
   )
+import Util (res404)
 
 apiRouter :: Application
-apiRouter =
-  router
-    [ ("list", listApp),
-      ("time", timeApp)
-    ]
-    app404
+apiRouter req respond = case pathInfo req of
+  ("list" : rest) -> listApp (req {Wai.pathInfo = rest}) respond
+  ["time"] -> timeApp req respond
+  _ -> res404 req respond
 
 listApp :: Application
 listApp req respond = do
