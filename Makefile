@@ -19,7 +19,7 @@ HTM_DIST  := $(HTM_SRC:./static/%.htm=./dist/%.html)
 CPY_DIST := $(CPY_SRC:./static/%=./dist/%)
 
 
-all: $(DIR_DIST) $(MD_DIST) $(HTM_DIST) $(CPY_DIST)
+all: $(DIR_DIST) $(MD_DIST) $(HTM_DIST) $(CPY_DIST) dist/post/index.html
 
 clean:
 	@# TODO add haskell and elm
@@ -43,3 +43,8 @@ dist/%.html: static/%.htm $(TMPLS)
 dist/%: static/%
 	@echo "$@ <- $?"
 	@cp $< $@
+
+# Posts index page
+dist/post/index.html: $(MD_SRC)
+	@echo "$@"
+	@cat $(HEAD_TMPL) <(for p in $$(ls static/post/); do echo $$p; done) $(FOOT_TMPL) > $@
