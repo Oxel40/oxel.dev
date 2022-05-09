@@ -9,17 +9,15 @@ findfiles = $(shell find $(1) -type f -name '$(2)' -print0 | xargs -0)
 
 
 DIR_SRC := $(shell find ./static/ -type d -print0 | xargs -0)
-MD_SRC  := $(call findfiles,./static/,*.md)
-HTM_SRC := $(call findfiles,./static/,*.htm)   # Will be used in templates
-CPY_SRC := $(filter-out $(MD_SRC) $(HTM_SRC),$(call findfiles,./static/,*))
+STC_SRC := $(call findfiles,./static/,*)
+STC_SRC := $(STC_SRC:%.md=%.html)
+STC_SRC := $(STC_SRC:%.htm=%.html)
 
 DIR_DIST := $(DIR_SRC:./static/%=./dist/%)
-MD_DIST  := $(MD_SRC:./static/%.md=./dist/%.html)
-HTM_DIST := $(HTM_SRC:./static/%.htm=./dist/%.html)
-CPY_DIST := $(CPY_SRC:./static/%=./dist/%)
+STC_DIST := $(STC_SRC:./static/%=./dist/%)
 
 
-all: $(DIR_DIST) $(MD_DIST) $(HTM_DIST) $(CPY_DIST) dist/post/index.html
+all: $(DIR_DIST) $(STC_DIST) dist/post/index.html
 
 clean:
 	@# TODO add haskell and elm
@@ -45,6 +43,6 @@ dist/%: static/%
 	@cp $< $@
 
 # Posts index page
-dist/post/index.html: $(MD_SRC)
+dist/post/index.html: static/post/*.md
 	@echo "$@"
 	@cat $(HEAD_TMPL) <(for p in $$(ls static/post/); do echo $$p; done) $(FOOT_TMPL) > $@
