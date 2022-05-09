@@ -48,4 +48,6 @@ dist/%: static/%
 # Posts index page
 dist/post/index.html: static/post/*.md
 	@echo "$@ <- $?"
-	@cat $(HEAD_TMPL) <(for p in $$(ls static/post/); do echo $$p; done) $(FOOT_TMPL) > $@
+	@cat <(cat $(HEAD_TMPL) | sed "s/|TITLE|/Posts/") \
+	     <(for p in $$(ls static/post/); do echo $$p; done) \
+	     $(FOOT_TMPL) > $@
