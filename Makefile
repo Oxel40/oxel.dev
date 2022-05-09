@@ -30,12 +30,15 @@ $(DIR_DIST):
 # Markdown
 dist/%.html: static/%.md $(TMPLS)
 	@echo "$@ <- $?"
-	@cat $(HEAD_TMPL) <(pandoc -f markdown -t html $<) $(FOOT_TMPL) > $@
+	@cat <(cat $(HEAD_TMPL) | sed "s/|TITLE|/$$(grep '^# .*$$' $< | head -1 | cut -c 3-)/") \
+	     <(pandoc -f markdown -t html $<) \
+	     $(FOOT_TMPL) > $@
 
 # HTM used with template
 dist/%.html: static/%.htm $(TMPLS)
 	@echo "$@ <- $?"
-	@cat $(HEAD_TMPL) $< $(FOOT_TMPL) > $@
+	@cat <(cat $(HEAD_TMPL) | sed "s/|TITLE|/$$(grep --only-matching '>.*</h1>' $< | head -1 | cut -c 2- | cut -d'<' -f1)/") \
+	     $< $(FOOT_TMPL) > $@
 
 # Other required files will be copied
 dist/%: static/%
