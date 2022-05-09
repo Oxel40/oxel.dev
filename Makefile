@@ -44,5 +44,5 @@ dist/%: static/%
 
 # Posts index page
 dist/post/index.html: static/post/*.md
-	@echo "$@"
+	@echo "$@ <- $?"
 	@cat $(HEAD_TMPL) <(for p in $$(ls static/post/); do echo $$p; done) $(FOOT_TMPL) > $@
