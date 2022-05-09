@@ -13,9 +13,9 @@ MD_SRC  := $(call findfiles,./static/,*.md)
 HTM_SRC := $(call findfiles,./static/,*.htm)   # Will be used in templates
 CPY_SRC := $(filter-out $(MD_SRC) $(HTM_SRC),$(call findfiles,./static/,*))
 
-DIR_DIST  := $(DIR_SRC:./static/%=./dist/%)
-MD_DIST   := $(MD_SRC:./static/%.md=./dist/%.html)
-HTM_DIST  := $(HTM_SRC:./static/%.htm=./dist/%.html)
+DIR_DIST := $(DIR_SRC:./static/%=./dist/%)
+MD_DIST  := $(MD_SRC:./static/%.md=./dist/%.html)
+HTM_DIST := $(HTM_SRC:./static/%.htm=./dist/%.html)
 CPY_DIST := $(CPY_SRC:./static/%=./dist/%)
 
 
