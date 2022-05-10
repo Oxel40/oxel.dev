@@ -30,14 +30,14 @@ $(DIR_DIST):
 # Markdown
 dist/%.html: static/%.md $(TMPLS)
 	@echo "$@ <- $?"
-	@cat <(cat $(HEAD_TMPL) | sed "s/|TITLE|/$$(grep '^# .*$$' $< | head -1 | cut -c 3-)/") \
+	@cat <(sed "s/|TITLE|/$$(grep '^# .*$$' $< | head -1 | cut -c 3-)/" $(HEAD_TMPL)) \
 	     <(pandoc -f markdown -t html $<) \
 	     $(FOOT_TMPL) > $@
 
 # HTM used with template
 dist/%.html: static/%.htm $(TMPLS)
 	@echo "$@ <- $?"
-	@cat <(cat $(HEAD_TMPL) | sed "s/|TITLE|/$$(grep --only-matching '>.*</h1>' $< | head -1 | cut -c 2- | cut -d'<' -f1)/") \
+	@cat <(sed "s/|TITLE|/$$(grep --only-matching '>.*</h1>' $< | head -1 | cut -c 2- | cut -d'<' -f1)/" $(HEAD_TMPL)) \
 	     $< $(FOOT_TMPL) > $@
 
 # Other required files will be copied
@@ -48,6 +48,6 @@ dist/%: static/%
 # Posts index page
 dist/post/index.html: static/post/*.md
 	@echo "$@ <- $?"
-	@cat <(cat $(HEAD_TMPL) | sed "s/|TITLE|/Posts/") \
+	@cat <(sed "s/|TITLE|/Posts/" $(HEAD_TMPL)) \
 	     <(for p in $$(ls static/post/); do echo $$p; done) \
 	     $(FOOT_TMPL) > $@
