@@ -46,7 +46,7 @@ dist/%: static/%
 	@cp $< $@
 
 # Posts index page
-dist/post/index.html: static/post/*.md
+dist/post/index.html: static/post/*.md $(TMPLS)
 	@echo "$@ <- $?"
 	@cat <(sed "s/|TITLE|/Posts/" $(HEAD_TMPL)) \
 	     <(for p in $$(ls static/post/); do echo $$p; done) \
