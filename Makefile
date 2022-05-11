@@ -31,7 +31,7 @@ $(DIR_DIST):
 dist/%.html: static/%.md $(TMPLS)
 	@echo "$@ <- $?"
 	@cat <(sed "s/|TITLE|/$$(grep '^# .*$$' $< | head -1 | cut -c 3-)/" $(HEAD_TMPL)) \
-	     <(pandoc -f markdown -t html $<) \
+	     <(pandoc -f markdown -t html5 $<) \
 	     $(FOOT_TMPL) > $@
 
 # HTM used with template
