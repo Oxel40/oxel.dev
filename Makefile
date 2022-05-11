@@ -5,13 +5,10 @@ TMPLS := $(HEAD_TMPL) $(FOOT_TMPL)
 .PHONY = all clean 
 
 
-findfiles = $(shell find $(1) -type f -name '$(2)' -print0 | xargs -0)
-
-
 DIR_SRC := $(shell find ./static/ -type d -print0 | xargs -0)
-STC_SRC := $(call findfiles,./static/,*)
+STC_SRC := $(shell find ./static/ -type f -print0 | xargs -0)
 STC_SRC := $(STC_SRC:%.md=%.html)
-STC_SRC := $(STC_SRC:%.htm=%.html)
+STC_SRC := $(STC_SRC:%.t.html=%.html)
 
 DIR_DIST := $(DIR_SRC:./static/%=./dist/%)
 STC_DIST := $(STC_SRC:./static/%=./dist/%)
@@ -20,7 +17,6 @@ STC_DIST := $(STC_SRC:./static/%=./dist/%)
 all: $(DIR_DIST) $(STC_DIST) dist/post/index.html
 
 clean:
-	@# TODO add haskell and elm
 	@rm -rf dist
 
 
@@ -35,7 +31,7 @@ dist/%.html: static/%.md $(TMPLS)
 	     $(FOOT_TMPL) > $@
 
 # HTM used with template
-dist/%.html: static/%.htm $(TMPLS)
+dist/%.html: static/%.t.html $(TMPLS)
 	@echo "$@ <- $?"
 	@cat <(sed "s/|TITLE|/$$(grep --only-matching '>.*</h1>' $< | head -1 | cut -c 2- | cut -d'<' -f1)/" $(HEAD_TMPL)) \
 	     $< $(FOOT_TMPL) > $@
