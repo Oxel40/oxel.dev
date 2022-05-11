@@ -1,4 +1,6 @@
 /* Shamelessly ripped from https://notthebe.ee/ and slightly modified to suite my needs */
+@import "onedark.css";
+
 html {
 	font-size: 100%;
 	overflow-y: scroll;
@@ -7,13 +9,13 @@ html {
 }
 
 :root {
-	--bg: #222;
+	--bg: #202329;
 	--fg: #fefefe;
-	--link: #4d7dcb;
-	--link_v: #99a5d3;
-	--link_h: #4c7ecf;
-	--bg_grey: #333;
-	--dark_grey: #333;
+	--link: var(--purple);
+	--link_v: var(--purple);
+	--link_h: var(--cyan);
+	--bg_grey: var(--background);
+	--dark_grey: var(--special_grey);
 }
 
 
