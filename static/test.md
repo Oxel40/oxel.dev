@@ -9,17 +9,27 @@ main = putStrLn "Hello, World!"
 This `let a = 1+2`{.haskell} is some inline code.
 
 ```haskell
+-- This is a bad comment
 qsort []     = []
 qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
                qsort (filter (>= x) xs)
 ```
 
 ```python
+# Do some stuff
 try:
-	print("test")
+	print("test", " ".join(['1', '2', '3']), sep='\t')
 except Exception e:
 	print(e)
 ```
+
+Awsome blockquote!
+
+> Hello there<br>
+> My name is ... and<br>
+> I like stuff
+
+This was said by someone important
 
 ## Lorem Ipsum
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In fermentum posuere urna nec. Velit egestas dui id ornare arcu odio ut sem. Duis tristique sollicitudin nibh sit amet. Gravida rutrum quisque non tellus orci ac. Magna etiam tempor orci eu lobortis elementum nibh tellus molestie. Cursus mattis molestie a iaculis at erat pellentesque adipiscing. A scelerisque purus semper eget duis. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis. Sem fringilla ut morbi tincidunt augue interdum velit euismod in. Mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Sit amet consectetur adipiscing elit. Nunc congue nisi vitae suscipit tellus mauris a diam.
