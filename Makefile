@@ -2,7 +2,7 @@ HEAD_TMPL = ./tmpl/head.html
 FOOT_TMPL = ./tmpl/foot.html
 TMPLS := $(HEAD_TMPL) $(FOOT_TMPL)
 
-.PHONY = all clean 
+.PHONY = all clean install clean-remote
 
 
 DIR_SRC := $(shell find ./static/ -type d -print0 | xargs -0)
@@ -18,6 +18,12 @@ all: $(DIR_DIST) $(STC_DIST) dist/post/index.html
 
 clean:
 	@rm -rf dist
+
+install:
+	@rsync -ruvhP -e ssh dist/* drop:/var/www/html/
+
+clean-remote:
+	@ssh drop 'rm -r /var/www/html/*'
 
 
 $(DIR_DIST):
