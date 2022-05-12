@@ -130,7 +130,6 @@ samp {
 }
 
 code {
-	white-space: pre;
 	white-space: pre-wrap;
 	word-wrap: break-word;
 	background: var(--bg_grey);
@@ -139,6 +138,9 @@ code {
 	border-radius: 3px;
 }
 pre > code {
+	white-space: pre;
+	word-wrap: normal;
+	overflow-x: auto;
 	display: block;
 	padding: 10px 15px;
 }
