@@ -36,7 +36,7 @@ dist/%.html: static/%.md $(TMPLS)
 	     <(pandoc -f markdown -t html5 $<) \
 	     $(FOOT_TMPL) > $@
 
-# HTM used with template
+# HTML used with template
 dist/%.html: static/%.t.html $(TMPLS)
 	@echo "$@ <- $?"
 	@cat <(sed "s/|TITLE|/$$(grep --only-matching '>.*</h1>' $< | head -1 | cut -c 2- | cut -d'<' -f1)/" $(HEAD_TMPL)) \
@@ -48,8 +48,8 @@ dist/%: static/%
 	@cp $< $@
 
 # Posts index page
-dist/post/index.html: static/post/*.md $(TMPLS)
+dist/post/index.html: static/post/*.md make-script/post-index.sh $(TMPLS) 
 	@echo "$@ <- $?"
 	@cat <(sed "s/|TITLE|/Posts/" $(HEAD_TMPL)) \
-	     <(for p in $$(ls static/post/); do echo $$p; done) \
+	     <(sh -e make-script/post-index.sh $$(ls static/post/*.md)) \
 	     $(FOOT_TMPL) > $@

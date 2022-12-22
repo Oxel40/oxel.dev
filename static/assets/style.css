@@ -34,10 +34,6 @@ body {
 	background: var(--bg);
 }
 
-footer {
-	color: var(--comment_grey);
-}
-
 a {
 	color: var(--link);
 	text-decoration: none;
@@ -353,6 +349,25 @@ ul.articles li {
 #Articles {
 	margin-top: 2em;
 }
+
+ul.cards {
+	list-style: none;
+	padding: 0;
+}
+ul.cards li {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	background: var(--bg_grey);
+	color: var(--fg);
+	padding: 10px;
+	margin: 1em;
+	border-radius: 3px;
+}
+ul.cards h2 {
+	margin-top: 0em;
+}
+
 footer {
 	font-size: 13px;
+	color: var(--comment_grey);
 }

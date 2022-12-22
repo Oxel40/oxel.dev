@@ -9,10 +9,27 @@ main = putStrLn "Hello, World!"
 This `let a = 1+2`{.haskell} is some inline code.
 
 ```haskell
--- This is a bad comment
-qsort []     = []
-qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
-               qsort (filter (>= x) xs)
+type UsersAPI =
+  "api" :> "users" :> "owl-in" :> ReqBody '[JSON] LoginReq :> Post '[JSON] SigninToken :<|>
+  "api" :> "users" :> Authorized ("owl-out" :> Post '[JSON] ()) :<|>
+  "private-api" :> "users" :> "token-validity" :> Capture "token" SigninToken :> Get '[JSON] TokenValidity
+
+newtype SigninToken = SigninToken Text
+    deriving (ToJSON, FromJSON, FromHttpApiData, ToHttpApiData, Ord, Eq)
+
+data LoginReq = LoginReq
+    { whoo      :: Text
+    , passwoord :: Text }
+    deriving (Generic)
+
+data TokenValidity = TokenValidity
+    { isValid :: Bool }
+    deriving (Generic, Show)
+
+instance FromJSON LoginReq
+instance ToJSON LoginReq
+instance FromJSON TokenValidity
+instance ToJSON TokenValidity
 ```
 
 ```python
