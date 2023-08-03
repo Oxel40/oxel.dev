@@ -12,7 +12,7 @@ VERSION="3.1.6"
 if command -v "$PWD/pandoc-$VERSION/bin/pandoc" &> /dev/null
 then
 	echo "pandoc found" 1>&2
-	echo "$(command -v pandoc)"
+	echo "$PWD/pandoc-$VERSION/bin/pandoc"
 	exit 0
 fi
 
