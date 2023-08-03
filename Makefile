@@ -4,6 +4,7 @@ TMPLS := $(HEAD_TMPL) $(FOOT_TMPL)
 
 .PHONY = all clean
 SHELL = /bin/bash -e
+PANDOC = $(shell ./make-script/pandoc-install.sh)
 
 
 DIR_SRC := $(shell find ./static/ -type d -print0 | xargs -0)
@@ -27,7 +28,7 @@ $(DIR_DIST):
 dist/%.html: static/%.md $(TMPLS)
 	@echo "$@ <- $?"
 	@cat <(sed "s/|TITLE|/$$(grep '^# .*$$' $< | head -1 | cut -c 3-)/" $(HEAD_TMPL)) \
-	     <(pandoc -f markdown -t html5 $<) \
+	     <($(PANDOC) -f markdown -t html5 $<) \
 	     $(FOOT_TMPL) > $@
 
 # HTML used with template
@@ -45,5 +46,5 @@ dist/%: static/%
 dist/post/index.html: static/post/*.md make-script/post-index.sh $(TMPLS) 
 	@echo "$@ <- $?"
 	@cat <(sed "s/|TITLE|/Posts/" $(HEAD_TMPL)) \
-	     <(sh -e make-script/post-index.sh $$(ls static/post/*.md)) \
+	     <(./make-script/post-index.sh $$(ls static/post/*.md)) \
 	     $(FOOT_TMPL) > $@
