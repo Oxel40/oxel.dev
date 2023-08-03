@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 echo '<h1>Posts</h1>'
 echo '<ul class="articles">'

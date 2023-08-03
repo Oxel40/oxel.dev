@@ -3,7 +3,7 @@ FOOT_TMPL = ./tmpl/foot.html
 TMPLS := $(HEAD_TMPL) $(FOOT_TMPL)
 
 .PHONY = all clean
-SHELL = /bin/bash
+SHELL = /bin/bash -e
 
 
 DIR_SRC := $(shell find ./static/ -type d -print0 | xargs -0)
