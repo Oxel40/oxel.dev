@@ -27,7 +27,7 @@ $(DIR_DIST):
 # Markdown
 dist/%.html: static/%.md $(TMPLS)
 	@echo "$@ <- $?"
-	@cat <(sed "s/|TITLE|/$$(grep '^# .*$$' $< | head -1 | cut -c 3-)/" $(HEAD_TMPL)) \
+	cat <(sed "s/|TITLE|/$$(grep '^# .*$$' $< | head -1 | cut -c 3-)/" $(HEAD_TMPL)) \
 	     <($(PANDOC) -f markdown -t html5 $<) \
 	     $(FOOT_TMPL) > $@
 
