@@ -32,7 +32,7 @@ dist/%.html: static/%.md $(TMPLS)
 # HTML used with template
 dist/%.html: static/%.t.html $(TMPLS)
 	@echo "$@ <- $?"
-	@cat <(sed "s/|TITLE|/$$(grep --only-matching '>.*</h1>' $< | head -1 | cut -c 2- | cut -d'<' -f1)/" $(HEAD_TMPL)) \
+	cat <(sed "s/|TITLE|/$$(grep --only-matching '>.*</h1>' $< | head -1 | cut -c 2- | cut -d'<' -f1)/" $(HEAD_TMPL)) \
 	     $< $(FOOT_TMPL) > $@
 
 # Other required files will be copied
