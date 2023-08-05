@@ -2,7 +2,7 @@
 
 This is the source code for the [oxel.dev](https://oxel.dev) website. The content is generated using `make`, `pandoc`, `bash` and standard Unix shell utilities.
 
-The site draws inspiration from [notthebe.ee](https://notthebe.ee) by Wolfgang, with the CSS styling heavily based on the CSS found on [notthebe.ee](https://notthebe.ee).
+The site draws inspiration from [notthebe.ee](https://notthebe.ee) by Wolfgang (especially the version depicted in [this video](https://www.youtube.com/watch?v=N_ttw2Dihn8)), with the CSS styling heavily based on the CSS found on [notthebe.ee](https://notthebe.ee).
 
 The colors and syntax highlighting is set to mimic the `OneDark` color scheme.
 
